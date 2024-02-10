@@ -8,7 +8,6 @@ const config = {
     mongoose: {
         db: 'mongodb://localhost/musicApp',
     }
-
 }
 
 export default config;

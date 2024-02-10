@@ -4,3 +4,9 @@ export interface ArtistType {
   information: string | null;
 }
 
+export interface AlbumType {
+  name: string;
+  artist: ArtistType;
+  date_release: string;
+  image: string | null;
+}
