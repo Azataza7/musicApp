@@ -7,7 +7,7 @@ const artistRouter = Router();
 
 artistRouter.get('/', async (req, res, next) => {
   try {
-    const results = await Artist.find();
+    const results: ArtistType[] = await Artist.find();
 
     return res.send(results);
   } catch (e) {

@@ -8,7 +8,7 @@ const TrackSchema = new Schema({
   },
   album: {
     type: Schema.Types.ObjectId,
-    ref: 'Album',
+    ref: 'album',
     required: true,
     validate: {
       validator: async (value: Types.ObjectId) => await Album.findById(value),

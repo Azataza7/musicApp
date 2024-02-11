@@ -6,13 +6,30 @@ import { AlbumType } from '../types';
 const albumRouter = Router();
 
 albumRouter.get('/', async (req, res, next) => {
-  try {
-    const results = await Album.find()
-      .populate('artist', '_id name information image');
+  const searchByArtistId = req.query.artist;
 
-    return res.send(results);
-  } catch (e) {
+  try {
+    if (searchByArtistId) {
+      const results: AlbumType[] = await Album.find({artist: searchByArtistId})
+        .populate('artist', '_id name information image');
+
+      if (!results || results.length === 0) {
+        return res.status(404).send({error: 'Not Found!'});
+      }
+
+      return res.send(results);
+    } else {
+      const results: AlbumType[] = await Album.find()
+        .populate('artist', '_id name information image');
+
+      return res.send(results);
+    }
+  } catch (e: any) {
     next(e);
+
+    if (e.name === 'CastError') {
+      return res.status(400).send({error: 'Invalid artist id format'});
+    }
   }
 });
 
@@ -36,7 +53,8 @@ albumRouter.get('/:id', async (req, res, next) => {
 albumRouter.post('/', imagesUpload.single('image'), async (req, res, next) => {
   const album: AlbumType = {
     name: req.body.name,
-    artist: req.body.artist,
+    artist: req.body.artist ? req.body.artist :
+      res.status(400).send({error: 'artist is required'}),
     date_release: req.body.date_release,
     image: req.file ? req.file.filename : null
   };

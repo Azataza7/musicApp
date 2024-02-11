@@ -10,3 +10,9 @@ export interface AlbumType {
   date_release: string;
   image: string | null;
 }
+
+export interface TrackType {
+  name: string;
+  album: AlbumType;
+  durationTime: string;
+}
