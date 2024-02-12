@@ -1,15 +1,29 @@
 import { Router } from 'express';
 import Track from '../models/Track';
-import { TrackType } from '../types';
+import { AlbumType, TrackType } from '../types';
+import Album from '../models/Album';
 
 const trackRouter = Router();
 
 trackRouter.get('/', async (req, res, next) => {
   const searchByAlbum = req.query.album;
+  const searchByArtist = req.query.artist;
 
   try {
     if (searchByAlbum) {
-      const results = await Track.find({album: searchByAlbum})
+      const results: TrackType[] = await Track.find({album: searchByAlbum})
+        .populate('album', '_id name artist date_release image');
+
+      if (!results || results.length === 0) {
+        return res.status(404).send({error: 'Not Found!'});
+      }
+
+      return res.send(results);
+    } else if (searchByArtist) {
+      const albums = await Album.find({ artist: searchByArtist }, '_id');
+      const albumIds = albums.map(album => album._id);
+
+      const results: TrackType[] = await Track.find({ album: { $in: albumIds } })
         .populate('album', '_id name artist date_release image');
 
       if (!results || results.length === 0) {
@@ -18,7 +32,7 @@ trackRouter.get('/', async (req, res, next) => {
 
       return res.send(results);
     } else {
-      const results = await Track.find().populate('album', '_id name artist date_release image');
+      const results: TrackType[] = await Track.find().populate('album', '_id name artist date_release image');
 
       return res.send(results);
     }
