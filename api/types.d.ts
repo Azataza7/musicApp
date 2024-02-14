@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 export interface ArtistType {
   name: string;
   image: string | null;
@@ -11,8 +13,18 @@ export interface AlbumType {
   image: string | null;
 }
 
+export interface AlbumTypeWithId extends AlbumType {
+  _id: string;
+}
+
 export interface TrackType {
   name: string;
   album: AlbumType;
   durationTime: string;
+}
+
+export interface UserFields {
+  username: string;
+  password: string;
+  token: string;
 }

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import Track from '../models/Track';
-import { AlbumType, TrackType } from '../types';
+import { AlbumTypeWithId, TrackType } from '../types';
 import Album from '../models/Album';
 
 const trackRouter = Router();
@@ -20,7 +20,7 @@ trackRouter.get('/', async (req, res, next) => {
 
       return res.send(results);
     } else if (searchByArtist) {
-      const albums = await Album.find({ artist: searchByArtist }, '_id');
+      const albums: AlbumTypeWithId[] = await Album.find({ artist: searchByArtist }, '_id');
       const albumIds = albums.map(album => album._id);
 
       const results: TrackType[] = await Track.find({ album: { $in: albumIds } })
