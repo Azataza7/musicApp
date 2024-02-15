@@ -13,7 +13,7 @@ interface UserMethods {
 
 type UserModel = Model<UserFields, {}, UserMethods>
 
-const UserSchema = new Schema<UserFields, UserModel, UserMethods>({
+const UserSchema = new Schema<UserFields, UserModel>({
   username: {
     type: String,
     required: true,
@@ -30,7 +30,7 @@ const UserSchema = new Schema<UserFields, UserModel, UserMethods>({
 
 });
 
-UserSchema.methods.checkPassword = function (password) {
+UserSchema.methods.checkPassword = async function (password: string) {
   return bcrypt.compare(password, this.password);
 };
 

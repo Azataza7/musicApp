@@ -24,6 +24,7 @@ export interface TrackType {
 }
 
 export interface UserFields {
+  _id: string;
   username: string;
   password: string;
   token: string;
