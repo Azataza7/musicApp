@@ -43,7 +43,5 @@ export const trackReducer = TrackSlice.reducer;
 
 export const selectTracks = (state: RootState) => state.track.tracks;
 
-export const selectTracksCount = (state: RootState) => state.track.tracks.length;
-
 export const selectOnloadingTrack = (state: RootState) => state.track.trackLoading;
 

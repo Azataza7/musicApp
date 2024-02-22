@@ -28,7 +28,7 @@ const Album = () => {
   }
 
   return (
-    <Grid component="div" sx={{display: "flex", gap: '20px'}}>
+    <Grid component="div" sx={{display: "flex", gap: '20px', flexWrap: "wrap"}}>
       {albumContainer}
     </Grid>
   );

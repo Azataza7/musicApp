@@ -3,22 +3,18 @@ import { Album } from '../../types';
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { apiURL } from '../../constants';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../app/hooks';
-import { selectTracksCount } from '../tracks/TrackSlice';
 
 interface Props {
   album: Album;
 }
 
 const AlbumItem: React.FC<Props> = ({album}) => {
-  const tracksCount = useAppSelector(selectTracksCount);
-
 
   return (
     <Link to={`/tracks/${album._id}`}
           style={{
-            flexBasis: '50%',
-            textDecoration: 'none'
+            flexBasis: '100%',
+            textDecoration: 'none',
           }}>
       <Card
         sx={{
@@ -26,13 +22,14 @@ const AlbumItem: React.FC<Props> = ({album}) => {
           bgcolor: 'transparent',
           padding: '10px',
           cursor: 'pointer',
+          transition: 'background-color 0.4s ease',
           '&:hover': {
-            bgcolor: 'lightgray',
-            opacity: 0.99,
+            bgcolor: "#3d3c3c",
+            opacity: 0.999,
           }
         }}
       >
-        <Box sx={{display: 'flex', flexDirection: 'column', flexBasis: '53%'}}>
+        <Box sx={{display: 'flex', flexDirection: 'column', flexBasis: '73%'}}>
           <CardContent sx={{flex: '1 0 auto', color: '#FFF'}}>
             <Typography component="div" variant="h6">
               {album.name}
@@ -51,13 +48,13 @@ const AlbumItem: React.FC<Props> = ({album}) => {
               color="text.secondary"
               component="div"
             >
-              Songs: {tracksCount}
+              Songs:
             </Typography>
           </CardContent>
         </Box>
         <CardMedia
           component="img"
-          sx={{width: 151, flexBasis: '40%'}}
+          sx={{maxHeight: 316 ,maxWidth: 151, flexBasis: '20%'}}
           image={apiURL + '/' + album.image}
           alt={album.name + ' image'}
         />

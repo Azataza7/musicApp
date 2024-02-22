@@ -14,18 +14,20 @@ interface Props {
 
 const ArtistItem: React.FC<Props> = ({artist}) => {
   return (
-    <Link to={`/albums/${artist._id}`} style={{textDecoration: "none"}}>
+    <Link to={`/albums/${artist._id}`}
+          style={{textDecoration: "none"}}>
       <Card
         sx={{
           width: '200px',
+          height: '85%',
           padding: '20px',
           bgcolor: 'transparent',
-          transition: 'background-color .3s ease',
+          transition: 'background-color 0.4s ease',
           borderRadius: '8px',
           cursor: 'pointer',
           '&:hover': {
-            bgcolor: 'lightgray',
-            opacity: 0.99,
+            bgcolor: '#3d3c3c',
+            opacity: 0.999,
           }
         }}>
         <CardMedia
