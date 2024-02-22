@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 
 export interface ArtistType {
   name: string;
@@ -9,7 +8,7 @@ export interface ArtistType {
 export interface AlbumType {
   name: string;
   artist: ArtistType;
-  date_release: string;
+  date_release: number;
   image: string | null;
 }
 
@@ -21,6 +20,7 @@ export interface TrackType {
   name: string;
   album: AlbumType;
   durationTime: string;
+  trackNumber: number;
 }
 
 export interface UserFields {

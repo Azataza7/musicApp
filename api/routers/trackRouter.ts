@@ -30,7 +30,7 @@ trackRouter.get('/', async (req, res, next) => {
         return res.status(404).send({error: 'Not Found!'});
       }
 
-      return res.send(results);
+      return res.send(results.length);
     } else {
       const results: TrackType[] = await Track.find().populate('album', '_id name artist date_release image');
 
@@ -46,10 +46,14 @@ trackRouter.get('/', async (req, res, next) => {
 });
 
 trackRouter.post('/', async (req, res, next) => {
+  const trackCount = await Track.countDocuments({ album: req.body.album });
+
+
   const track: TrackType = {
     name: req.body.name,
     album: req.body.album,
     durationTime: req.body.durationTime,
+    trackNumber: trackCount + 1
   };
 
   try {

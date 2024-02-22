@@ -11,7 +11,9 @@ albumRouter.get('/', async (req, res, next) => {
   try {
     if (searchByArtistId) {
       const results: AlbumType[] = await Album.find({artist: searchByArtistId})
-        .populate('artist', '_id name information image');
+        .populate('artist', '_id name information image')
+        .sort({date_release: -1})
+        .lean();
 
       if (!results || results.length === 0) {
         return res.status(404).send({error: 'Not Found!'});
@@ -51,6 +53,7 @@ albumRouter.get('/:id', async (req, res, next) => {
 });
 
 albumRouter.post('/', imagesUpload.single('image'), async (req, res, next) => {
+
   const album: AlbumType = {
     name: req.body.name,
     artist: req.body.artist ? req.body.artist :

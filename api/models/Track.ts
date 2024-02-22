@@ -17,6 +17,10 @@ const TrackSchema = new Schema({
   },
   durationTime: {
     type: String
+  },
+  trackNumber: {
+    type: Number,
+    required: true
   }
 });
 
