@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectArtists, selectOnloadingArtist } from './ArtistSlice';
 import { fetchArtists } from './ArtistThunks';
 import { CircularProgress, Grid } from '@mui/material';
-import { Album, Artist } from '../../types';
+import { Artist } from '../../types';
 import ArtistItem from './ArtistItem';
 
 const Artist = () => {
