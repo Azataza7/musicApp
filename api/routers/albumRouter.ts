@@ -8,6 +8,7 @@ const albumRouter = Router();
 albumRouter.get('/', async (req, res, next) => {
   const searchByArtistId = req.query.artist;
 
+
   try {
     if (searchByArtistId) {
       const results: AlbumType[] = await Album.find({artist: searchByArtistId})

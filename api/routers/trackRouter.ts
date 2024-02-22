@@ -12,13 +12,21 @@ trackRouter.get('/', async (req, res, next) => {
   try {
     if (searchByAlbum) {
       const results: TrackType[] = await Track.find({album: searchByAlbum})
-        .populate('album', '_id name artist date_release image');
+        .populate({
+        path: 'album',
+        select: '_id name artist date_release image',
+        populate: {
+          path: 'artist',
+          select: '_id name image'
+        }
+      });
 
       if (!results || results.length === 0) {
         return res.status(404).send({error: 'Not Found!'});
       }
 
-      return res.send(results);
+      return res.send(results.sort((a, b) => a.trackNumber - b.trackNumber));
+
     } else if (searchByArtist) {
       const albums: AlbumTypeWithId[] = await Album.find({ artist: searchByArtist }, '_id');
       const albumIds = albums.map(album => album._id);
@@ -30,7 +38,7 @@ trackRouter.get('/', async (req, res, next) => {
         return res.status(404).send({error: 'Not Found!'});
       }
 
-      return res.send(results.length);
+      return res.send(results);
     } else {
       const results: TrackType[] = await Track.find().populate('album', '_id name artist date_release image');
 
