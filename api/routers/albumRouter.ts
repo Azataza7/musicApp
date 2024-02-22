@@ -2,12 +2,12 @@ import { Router } from 'express';
 import Album from '../models/Album';
 import { imagesUpload } from '../multer';
 import { AlbumType } from '../types';
+import mongoose from 'mongoose';
 
 const albumRouter = Router();
 
 albumRouter.get('/', async (req, res, next) => {
   const searchByArtistId = req.query.artist;
-
 
   try {
     if (searchByArtistId) {
@@ -27,12 +27,12 @@ albumRouter.get('/', async (req, res, next) => {
 
       return res.send(results);
     }
-  } catch (e: any) {
-    next(e);
-
-    if (e.name === 'CastError') {
+  } catch (error) {
+    if (mongoose.MongooseError) {
       return res.status(400).send({error: 'Invalid artist id format'});
     }
+
+    next(error);
   }
 });
 

@@ -11,29 +11,27 @@ trackRouter.get('/', async (req, res, next) => {
 
   try {
     if (searchByAlbum) {
-      const results: TrackType[] = await Track.find({album: searchByAlbum})
+      const results: TrackType[] = await Track.find({album: searchByAlbum}).sort({trackNumber: 1})
         .populate({
-        path: 'album',
-        select: '_id name artist date_release image',
-        populate: {
-          path: 'artist',
-          select: '_id name image'
-        }
-      });
+          path: 'album', select: '_id name date_release image',
+          populate: {
+            path: 'artist',
+            select: '_id name image'
+          }
+        });
 
       if (!results || results.length === 0) {
         return res.status(404).send({error: 'Not Found!'});
       }
 
-      return res.send(results.sort((a, b) => a.trackNumber - b.trackNumber));
+      return res.send(results);
 
     } else if (searchByArtist) {
-      const albums: AlbumTypeWithId[] = await Album.find({ artist: searchByArtist }, '_id');
+      const albums: AlbumTypeWithId[] = await Album.find({artist: searchByArtist}, '_id');
       const albumIds = albums.map(album => album._id);
 
-      const results: TrackType[] = await Track.find({ album: { $in: albumIds } })
+      const results: TrackType[] = await Track.find({album: {$in: albumIds}})
         .populate('album', '_id name artist date_release image');
-
       if (!results || results.length === 0) {
         return res.status(404).send({error: 'Not Found!'});
       }
@@ -54,7 +52,7 @@ trackRouter.get('/', async (req, res, next) => {
 });
 
 trackRouter.post('/', async (req, res, next) => {
-  const trackCount = await Track.countDocuments({ album: req.body.album });
+  const trackCount = await Track.countDocuments({album: req.body.album});
 
 
   const track: TrackType = {
