@@ -16,6 +16,10 @@ export interface AlbumTypeWithId extends AlbumType {
   _id: string;
 }
 
+export interface AlbumTypeWithId extends AlbumType {
+  _id: string;
+}
+
 export interface TrackType {
   name: string;
   album: AlbumType;

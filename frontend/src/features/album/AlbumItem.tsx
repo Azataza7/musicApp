@@ -13,15 +13,13 @@ const AlbumItem: React.FC<Props> = ({album}) => {
   return (
     <Link to={`/tracks/${album._id}`}
           style={{
-            flexBasis: '100%',
+            flexBasis: '33%',
             textDecoration: 'none',
           }}>
       <Card
         sx={{
-          display: 'flex',
-          bgcolor: 'transparent',
-          padding: '10px',
-          cursor: 'pointer',
+          display: 'flex', flexWrap: 'wrap', justifyContent: "center",
+          bgcolor: '#181818', cursor: 'pointer', height: '290px', padding: '5px',
           transition: 'background-color 0.4s ease',
           '&:hover': {
             bgcolor: "#3d3c3c",
@@ -29,18 +27,26 @@ const AlbumItem: React.FC<Props> = ({album}) => {
           }
         }}
       >
-        <Box sx={{display: 'flex', flexDirection: 'column', flexBasis: '73%'}}>
-          <CardContent sx={{flex: '1 0 auto', color: '#FFF'}}>
-            <Typography component="div" variant="h6">
+        <Box sx={
+          {display: 'flex', flexDirection: 'column'}
+        }>
+          <CardContent sx={{ color: '#FFF'}}>
+            <CardMedia
+              component="img"
+              sx={{maxHeight: 316 ,maxWidth: 171, flexBasis: '20%'}}
+              image={apiURL + '/' + album.image}
+              alt={album.name + ' image'}
+            />
+            <Typography component="div" variant="p">
               {album.name}
             </Typography>
             <Typography
-              sx={{color: '#FFF'}}
+              sx={{color: '#a7a7a7'}}
               variant="subtitle1"
               color="text.secondary"
               component="div"
             >
-              {album.date_release}
+              Date release: {album.date_release}
             </Typography>
             <Typography
               sx={{color: '#FFF'}}
@@ -52,12 +58,6 @@ const AlbumItem: React.FC<Props> = ({album}) => {
             </Typography>
           </CardContent>
         </Box>
-        <CardMedia
-          component="img"
-          sx={{maxHeight: 316 ,maxWidth: 151, flexBasis: '20%'}}
-          image={apiURL + '/' + album.image}
-          alt={album.name + ' image'}
-        />
       </Card>
     </Link>
   );

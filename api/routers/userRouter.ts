@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import User from '../models/User';
-import { mongo } from 'mongoose';
+import mongoose, { mongo } from 'mongoose';
 import bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
 
@@ -14,11 +14,11 @@ userRouter.post('/', async (req, res, next) => {
     user.generateToken();
 
     await user.save();
-    res.status(201).send(user);
+    res.status(201).send({message: 'ok', user});
 
   } catch (e) {
-    if (e instanceof mongo.MongoServerError && e.code === 11000) {
-      return res.status(422).send({message: 'username should be unique!'});
+    if (e instanceof mongoose.Error.ValidationError) {
+      return res.status(422).send(e);
     }
 
     next(e);

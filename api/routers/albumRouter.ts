@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import Album from '../models/Album';
 import { imagesUpload } from '../multer';
-import { AlbumType } from '../types';
+import { AlbumType, AlbumTypeWithId } from '../types';
 import mongoose from 'mongoose';
 
 const albumRouter = Router();
@@ -11,7 +11,7 @@ albumRouter.get('/', async (req, res, next) => {
 
   try {
     if (searchByArtistId) {
-      const results: AlbumType[] = await Album.find({artist: searchByArtistId})
+      const results: AlbumTypeWithId[] = await Album.find({artist: searchByArtistId})
         .populate('artist', '_id name information image')
         .sort({date_release: -1})
         .lean();

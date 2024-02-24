@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectArtists, selectOnloadingArtist } from './ArtistSlice';
 import { fetchArtists } from './ArtistThunks';
-import { CircularProgress, Grid } from '@mui/material';
+import { CircularProgress, Grid} from '@mui/material';
 import { Artist } from '../../types';
 import ArtistItem from './ArtistItem';
 
@@ -11,9 +11,9 @@ const Artist = () => {
   const artists: Artist[] = useAppSelector(selectArtists);
   const onLoading: boolean = useAppSelector(selectOnloadingArtist);
 
-
   useEffect(() => {
     dispatch(fetchArtists());
+
   }, [dispatch]);
 
   if (onLoading) {
@@ -27,7 +27,8 @@ const Artist = () => {
 
   return (
     <>
-      <Grid component="div" sx={{display: "flex", gap: '20px', flexWrap: "wrap"}}>
+      <Grid component="div" sx={{display: "flex", gap: '20px', flexWrap: "wrap",
+        bgcolor: '#121212'}}>
         {ArtistContainer}
       </Grid>
     </>

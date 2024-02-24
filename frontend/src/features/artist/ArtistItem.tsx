@@ -18,10 +18,10 @@ const ArtistItem: React.FC<Props> = ({artist}) => {
           style={{textDecoration: "none"}}>
       <Card
         sx={{
-          width: '200px',
+          maxWidth: '200px',
           height: '85%',
           padding: '20px',
-          bgcolor: 'transparent',
+          bgcolor: '#181818',
           transition: 'background-color 0.4s ease',
           borderRadius: '8px',
           cursor: 'pointer',

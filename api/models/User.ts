@@ -1,4 +1,4 @@
-import mongoose, { Model, Schema } from 'mongoose';
+import mongoose, { HydratedDocument, Model, Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
 import { UserFields } from '../types';
@@ -17,7 +17,16 @@ const UserSchema = new Schema<UserFields, UserModel>({
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    validate: {
+      validator: async function (this: HydratedDocument<UserFields>, value: string): Promise<boolean> {
+        if (!this.isModified('username')) return true;
+
+        const user = await User.findOne({username: value});
+        return !user;
+      },
+      message: 'this username has been reserved'
+    }
   },
   password: {
     type: String,
