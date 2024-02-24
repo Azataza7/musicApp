@@ -1,5 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import { AppBar, Button, Grid, styled, Toolbar, Typography } from '@mui/material';
+import { selectUser } from '../../../features/users/usersSlice';
+import { useAppSelector } from '../../../app/hooks';
+import UserMenu from './UserMenu';
+import AnonymousMenu from './AnonymousMenu';
 
 const Link = styled(NavLink)({
   color: 'inherit',
@@ -10,6 +14,9 @@ const Link = styled(NavLink)({
 });
 
 const AppToolbar = () => {
+  const user = useAppSelector(selectUser);
+
+
   return (
     <AppBar position="sticky" sx={{bgcolor: '#121212', borderTopLeftRadius: 8, borderTopRightRadius: 8,}}>
       <Toolbar>
@@ -17,27 +24,7 @@ const AppToolbar = () => {
           <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
             <Link to="/">Smotify</Link>
           </Typography>
-          <Grid component="div" sx={{display: 'flex', gap: 2}}>
-            <Button component={NavLink} to="/register" color="inherit" sx={{
-              color: '#a7a7a7', bgcolor: 'transparent', fontWeight: 700, transition: 'transform 0.2s ease',
-              '&:hover': {
-                transform: 'scale(1.05)',
-                color: '#FFFFFF'
-              }
-            }}>
-              Sign up
-            </Button>
-            <Button component={NavLink} to="/login" color="inherit" sx={{
-              color: '#000', fontWeight: 700, bgcolor: '#FFF', padding: 2, borderRadius: 10,
-              transition: 'transform 0.2s ease',
-              '&:hover': {
-                transform: 'scale(1.05)',
-                bgcolor: '#FFF',
-              }
-            }}>
-              Sign In
-            </Button>
-          </Grid>
+          {user ? (<UserMenu/>) : (<AnonymousMenu/>)}
         </Grid>
       </Toolbar>
     </AppBar>

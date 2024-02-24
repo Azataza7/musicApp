@@ -4,14 +4,13 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Alert, Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-import { selectLoginError, selectUser } from './usersSlice';
+import { selectLoginError} from './usersSlice';
 import { login } from './usersThunks';
 
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const error = useAppSelector(selectLoginError);
-  const user = useAppSelector(selectUser);
 
   const [state, setState] = useState<LoginMutation>({
     username: '',
@@ -33,7 +32,6 @@ const Login = () => {
     navigate('/');
   };
 
-  console.log(user)
   return (
     <Container component="main" maxWidth="xl"
                sx={{bgcolor: '#FFF', borderBottomLeftRadius: 8, borderBottomRightRadius: 8}}>
@@ -82,6 +80,7 @@ const Login = () => {
             fullWidth
             variant="contained"
             sx={{mt: 3, mb: 2}}
+            disabled={Boolean(state.password.length < 3)}
           >
             Sign In
           </Button>

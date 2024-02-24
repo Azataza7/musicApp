@@ -26,7 +26,8 @@ export const UsersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    setState: () => {
+    logoutUser: state => {
+      state.user = null;
     }
   },
   extraReducers: (builder) => {
@@ -67,3 +68,5 @@ export const selectLoginLoading = (state: RootState) => state.users.loginLoading
 
 export const selectUserError = (state: RootState) => state.users.registerError;
 export const selectLoginError = (state: RootState) => state.users.loginError;
+
+export const { logoutUser } = UsersSlice.actions;

@@ -30,7 +30,7 @@ const UserSchema = new Schema<UserFields, UserModel>({
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   token: {
     type: String,
