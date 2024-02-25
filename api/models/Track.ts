@@ -1,5 +1,6 @@
 import mongoose, { Schema, Types } from 'mongoose';
 import Album from './Album';
+import Artist from './Artist';
 
 const TrackSchema = new Schema({
   name: {

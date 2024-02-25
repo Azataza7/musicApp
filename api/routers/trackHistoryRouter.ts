@@ -12,16 +12,16 @@ trackHistoryRouter.get('/', async (req, res, next) => {
     const user = await User.findOne({token: authToken});
 
     if (!user) {
-      return res.status(500).send({error: 'No permission'})
+      return res.status(500).send({error: 'No permission'});
     }
 
     const results = await TrackHistory.find({user: user._id})
       .populate('user')
       .populate('track');
 
-    return res.send(results)
+    return res.send(results.reverse());
   } catch (e) {
-    next(e)
+    next(e);
   }
 });
 

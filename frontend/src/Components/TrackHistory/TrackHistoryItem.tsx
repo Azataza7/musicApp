@@ -15,15 +15,16 @@ const TrackHistoryItem: React.FC<Props> = ({trackItem}) => {
   const album: Album = useAppSelector(selectAlbumItem);
 
   useEffect(() => {
-    dispatch(fetchAlbums(trackItem.track.album))
-  }, [dispatch, trackItem.track.album])
-
+    dispatch(fetchAlbums(trackItem.track.album));
+  }, [dispatch, trackItem.track.album]);
 
   return (
-    <Grid component="div">
+    <Grid
+      component="div"
+      sx={{gap: 7, flexBasis: '90%', display: "flex", borderBottom: '3px solid #181818'}}>
+      <Typography>{album?.artist.name}</Typography>
       <Typography>{trackItem.track.name}</Typography>
       <Typography>{dayjs(trackItem.datetime).format('YYYY-MM-DD HH:mm:ss')}</Typography>
-      <Typography>{album?.artist.name}</Typography>
     </Grid>
   );
 };
