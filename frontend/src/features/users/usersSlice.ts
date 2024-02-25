@@ -69,4 +69,4 @@ export const selectLoginLoading = (state: RootState) => state.users.loginLoading
 export const selectUserError = (state: RootState) => state.users.registerError;
 export const selectLoginError = (state: RootState) => state.users.loginError;
 
-export const { logoutUser } = UsersSlice.actions;
+export const {logoutUser} = UsersSlice.actions;

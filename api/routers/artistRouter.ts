@@ -6,10 +6,16 @@ import { imagesUpload } from '../multer';
 const artistRouter = Router();
 
 artistRouter.get('/', async (req, res, next) => {
-  try {
-    const results: ArtistType[] = await Artist.find();
+  const id = req.query.id;
 
-    return res.send(results);
+  try {
+    if (id) {
+      const result: ArtistType | null = await Artist.findById(id);
+      return res.send(result);
+    } else {
+      const results: ArtistType[] = await Artist.find();
+      return res.send(results);
+    }
   } catch (e) {
     next(e);
   }

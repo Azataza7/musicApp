@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Alert, Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-import { selectLoginError} from './usersSlice';
+import { selectLoginError } from './usersSlice';
 import { login } from './usersThunks';
 
 const Login = () => {

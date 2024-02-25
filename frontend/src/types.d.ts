@@ -57,3 +57,21 @@ export interface RegisterResponse {
 export interface GlobalError {
   error: string;
 }
+
+export interface trackHistoryType {
+  _id: string;
+  datetime: string;
+  user: User;
+  track: Track;
+}
+
+export interface trackHistoryTypeResponse {
+  message: string;
+  trackHistory: trackHistoryType;
+}
+
+export interface trackHistoryRequest {
+  track: string;
+  token: string;
+}
+

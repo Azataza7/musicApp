@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { AppBar, Button, Grid, styled, Toolbar, Typography } from '@mui/material';
+import { AppBar, Grid, styled, Toolbar, Typography } from '@mui/material';
 import { selectUser } from '../../../features/users/usersSlice';
 import { useAppSelector } from '../../../app/hooks';
 import UserMenu from './UserMenu';
@@ -15,7 +15,6 @@ const Link = styled(NavLink)({
 
 const AppToolbar = () => {
   const user = useAppSelector(selectUser);
-
 
   return (
     <AppBar position="sticky" sx={{bgcolor: '#121212', borderTopLeftRadius: 8, borderTopRightRadius: 8,}}>

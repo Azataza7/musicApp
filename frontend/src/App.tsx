@@ -6,6 +6,7 @@ import Album from './features/album/Album';
 import Tracks from './features/tracks/Tracks';
 import Register from './features/users/Register';
 import Login from './features/users/Login';
+import TrackHistory from './Components/TrackHistory/TrackHistory';
 
 const App = () => {
 
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/albums/:id" element={(<Album/>)}/>
             <Route path="/tracks/:id" element={(<Tracks/>)}/>
             <Route path="/register" element={(<Register/>)}/>
+            <Route path="/track_history" element={(<TrackHistory/>)}/>
             <Route path="/login" element={(<Login/>)}/>
             <Route path="*" element={(
               <Typography variant="h3">Not Found!</Typography>

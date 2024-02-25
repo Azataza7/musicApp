@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Avatar, Button, Menu, MenuItem} from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { logoutUser, selectUser } from '../../../features/users/usersSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LogOutModal from '../../Modals/LogOutModal';
+import QueueMusicIcon from '@mui/icons-material/QueueMusic';
+
 
 const UserMenu = () => {
   const [openModal, setOpenModal] = React.useState(false);
@@ -39,7 +41,9 @@ const UserMenu = () => {
       </Button>
       <Menu open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={handleClose} keepMounted>
         <MenuItem>Profile</MenuItem>
-        <MenuItem>FAQ</MenuItem>
+        <MenuItem>
+          <Link to='/track_history' style={{textDecoration: 'none'}}>Music History</Link><QueueMusicIcon/>
+        </MenuItem>
         <MenuItem onClick={() => setOpenModal(true)}>Logout</MenuItem>
       </Menu>
     </>

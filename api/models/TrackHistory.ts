@@ -19,7 +19,7 @@ const TrackHistorySchema = new Schema({
     validate: {
       validator: async (value: Types.ObjectId) => await Track.findById(value),
       message: 'Track not found',
-    }
+    },
   },
   datetime: {
     type: Date,
