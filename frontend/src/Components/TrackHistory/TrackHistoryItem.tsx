@@ -1,21 +1,13 @@
-import React, { useEffect } from 'react';
-import { Album, trackHistoryType } from '../../types';
+import React from 'react';
+import { trackHistoryType } from '../../types';
 import { Grid, Typography } from '@mui/material';
 import dayjs from 'dayjs';
-import { fetchAlbums } from '../../features/album/AlbumThunks';
-import { useAppDispatch} from '../../app/hooks';
 
 interface Props {
   trackItem: trackHistoryType;
 }
 
 const TrackHistoryItem: React.FC<Props> = ({trackItem}) => {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchAlbums(trackItem.track.album));
-  }, [dispatch, trackItem.track.album]);
-
   return (
     <Grid
       component="div"

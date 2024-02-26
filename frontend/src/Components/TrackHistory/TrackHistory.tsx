@@ -15,8 +15,6 @@ const TrackHistory = () => {
 
   const user: User = useAppSelector(selectUser);
 
-  console.log(user)
-
   const historyList: trackHistoryType[] = useAppSelector(selectTracksHistoryList);
 
   useEffect(() => {
