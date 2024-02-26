@@ -17,6 +17,7 @@ export interface Track {
   _id: string;
   name: string;
   album: Album;
+  artist: Artist;
   durationTime: string;
   trackNumber: number;
 }

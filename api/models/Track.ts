@@ -16,6 +16,15 @@ const TrackSchema = new Schema({
       message: 'Album not found',
     }
   },
+  artist: {
+    type: Schema.Types.ObjectId,
+    ref: 'artist',
+    required: true,
+    validate: {
+      validator: async (value: Types.ObjectId) => await Artist.findById(value),
+      message: 'Artist not found',
+    },
+  },
   durationTime: {
     type: String
   },

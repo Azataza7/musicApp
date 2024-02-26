@@ -22,6 +22,14 @@ const TrackHistorySchema = new Schema({
       message: 'Track not found',
     },
   },
+  artist: {
+    type: Schema.Types.ObjectId,
+    ref: 'Artist',
+    validate: {
+      validator: async (value: Types.ObjectId) => await Artist.findById(value),
+      message: 'Artist not found',
+    },
+  },
   datetime: {
     type: Date,
     default: Date.now,

@@ -62,30 +62,35 @@ const run = async () => {
     {
       name: '10K BFG',
       album: album1,
+      artist: artist1,
       durationTime: '4:34',
       trackNumber: 1
     },
     {
       name: 'Hell on the Earth',
       album: album1,
+      artist: artist1,
       durationTime: '3:14',
       trackNumber: 2
     },
     {
       name: 'Cultist Base',
       album: album1,
+      artist: artist1,
       durationTime: '5:04',
       trackNumber: 3
     },
     {
       name: "At the Doom's Gate",
       album: album1,
+      artist: artist1,
       durationTime: '2:12',
       trackNumber: 4
     },
     {
       name: 'The Super gone nest',
       album: album1,
+      artist: artist1,
       durationTime: '3:55',
       trackNumber: 5
     },
@@ -93,30 +98,35 @@ const run = async () => {
     {
       name: 'Meat Hook',
       album: album2,
+      artist: artist1,
       durationTime: '6:04',
       trackNumber: 1
     },
     {
       name: 'Inferno',
       album: album2,
+      artist: artist1,
       durationTime: '1:56',
       trackNumber: 2
     },
     {
       name: 'Eternal',
       album: album2,
+      artist: artist1,
       durationTime: '4:00',
       trackNumber: 3
     },
     {
       name: "Rust, Dust & Guts",
       album: album2,
+      artist: artist1,
       durationTime: '3:15',
       trackNumber: 4
     },
     {
       name: 'Metal Hell',
       album: album2,
+      artist: artist1,
       durationTime: '2:45',
       trackNumber: 5
     },
@@ -124,30 +134,35 @@ const run = async () => {
     {
       name: 'Better Place',
       album: album3,
+      artist: artist2,
       durationTime: '3:02',
       trackNumber: 1
     },
     {
       name: 'Selfish',
       album: album3,
+      artist: artist2,
       durationTime: '2:58',
       trackNumber: 2
     },
     {
       name: 'Cry Me a River',
       album: album3,
+      artist: artist2,
       durationTime: '2:22',
       trackNumber: 3
     },
     {
       name: 'Mirrors',
       album: album3,
+      artist: artist2,
       durationTime: '4:00',
       trackNumber: 4
     },
     {
       name: 'Perfect',
       album: album3,
+      artist: artist2,
       durationTime: '2:42',
       trackNumber: 5
     },
@@ -155,30 +170,35 @@ const run = async () => {
     {
       name: 'SexyBack',
       album: album4,
+      artist: artist2,
       durationTime: '3:10',
       trackNumber: 1
     },
     {
       name: 'Like i love you',
       album: album4,
+      artist: artist2,
       durationTime: '2:43',
       trackNumber: 2
     },
     {
       name: 'Cant stop the Feeling',
       album: album4,
+      artist: artist2,
       durationTime: '2:34',
       trackNumber: 3
     },
     {
       name: 'Selfish',
       album: album4,
+      artist: artist2,
       durationTime: '3:44',
       trackNumber: 4
     },
     {
       name: 'Until the end of time',
       album: album4,
+      artist: artist2,
       durationTime: '2:24',
       trackNumber: 5
     },

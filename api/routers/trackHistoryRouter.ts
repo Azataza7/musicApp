@@ -17,7 +17,10 @@ trackHistoryRouter.get('/', async (req, res, next) => {
 
     const results = await TrackHistory.find({user: user._id})
       .populate('user')
-      .populate('track');
+      .populate({
+        path: 'track',
+        populate: {path: 'artist'}
+      });
 
     return res.send(results.reverse());
   } catch (e) {
@@ -36,10 +39,10 @@ trackHistoryRouter.post('/', async (req, res, next) => {
 
     const {track} = req.body;
 
-    const trackData = await Track.findById(track).populate({path: 'album'});
+    const trackData = await Track.findById(track).populate({path: 'artist'});
 
     const trackHistory = new TrackHistory({
-      user: user,
+      user: user._id,
       track: trackData,
     });
 

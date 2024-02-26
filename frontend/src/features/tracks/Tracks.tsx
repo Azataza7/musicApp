@@ -18,7 +18,7 @@ const Tracks = () => {
   const onLoading: boolean = useAppSelector(selectOnloadingTrack);
   const albumId = useParams().id.toString();
   const user = useAppSelector(selectUser);
-
+  
   useEffect(() => {
     dispatch(fetchTracks(albumId));
   }, [dispatch, albumId]);
