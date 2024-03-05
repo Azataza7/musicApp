@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import { Album } from '../../types';
 import { RootState } from '../../app/store';
 import { fetchAlbums, fetchArtistAlbums } from './AlbumThunks';

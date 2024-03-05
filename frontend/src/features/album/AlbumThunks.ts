@@ -3,8 +3,8 @@ import { Album } from '../../types';
 import axiosApi from '../../axiosApi';
 import { isAxiosError } from 'axios';
 
-export const fetchArtistAlbums = createAsyncThunk<Album[], string>(
-  'albums',
+export const fetchArtistAlbums = createAsyncThunk<Album[], string, {rejectValue: string}>(
+  'albums/fetchArtistAlbums',
   async (artistId) => {
     const response = await axiosApi.get(`/albums/?artist=${artistId}`);
 
@@ -14,9 +14,9 @@ export const fetchArtistAlbums = createAsyncThunk<Album[], string>(
 
 export const fetchAlbums = createAsyncThunk<Album, string, { rejectValue }>(
   'album/byId',
-  async (id, {rejectWithValue}) => {
+  async (artistId, {rejectWithValue}) => {
     try {
-      const response = await axiosApi.get(`/albums/${id}`);
+      const response = await axiosApi.get(`/albums/${artistId}`);
 
       return response.data;
     } catch (e) {
