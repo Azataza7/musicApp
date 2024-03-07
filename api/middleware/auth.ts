@@ -18,11 +18,7 @@ const auth = async (
     return res.status(401).send({ error: 'No Authorization header present' });
   }
 
-  if (!tokenValue) {
-    return res.status(401).send({ error: 'No token present' });
-  }
-
-  const user = await User.findOne({ tokenValue });
+  const user = await User.findOne({token: tokenValue });
 
   if (!user) {
     return res.status(401).send({ error: 'Wrong token!' });
