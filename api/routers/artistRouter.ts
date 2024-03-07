@@ -2,6 +2,7 @@ import { Router } from 'express';
 import Artist from '../models/Artist';
 import { ArtistType } from '../types';
 import { imagesUpload } from '../multer';
+import auth from '../middleware/auth';
 
 const artistRouter = Router();
 
@@ -21,7 +22,7 @@ artistRouter.get('/', async (req, res, next) => {
   }
 });
 
-artistRouter.post('/', imagesUpload.single('image'), async (req, res, next) => {
+artistRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next) => {
   const artist: ArtistType = {
     name: req.body.name ? req.body.name :
       res.status(400).send({error: 'Name is required'}),

@@ -43,4 +43,27 @@ userRouter.post('/sessions', async (req, res, next) => {
   }
 });
 
+userRouter.delete('/sessions', async (req, res, next) => {
+  try {
+    const token = req.get('Authorization');
+
+    if (!token) {
+      return res.send({message: 'No token or invalid'});
+    }
+
+    const user = await User.findOne({token});
+
+    if (!user) {
+      return res.send({error: 'User not Found'});
+    }
+
+    user.generateToken();
+    await user.save();
+
+    return res.send({message: 'Success'});
+  } catch (e) {
+    return next(e);
+  }
+});
+
 export default userRouter;

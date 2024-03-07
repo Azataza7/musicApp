@@ -2,6 +2,7 @@ import { Router } from 'express';
 import Track from '../models/Track';
 import { AlbumTypeWithId, TrackType } from '../types';
 import Album from '../models/Album';
+import auth from '../middleware/auth';
 
 const trackRouter = Router();
 
@@ -51,7 +52,7 @@ trackRouter.get('/', async (req, res, next) => {
   }
 });
 
-trackRouter.post('/', async (req, res, next) => {
+trackRouter.post('/', auth, async (req, res, next) => {
   const trackCount = await Track.countDocuments({album: req.body.album});
 
 
