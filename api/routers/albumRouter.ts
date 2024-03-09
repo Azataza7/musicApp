@@ -62,7 +62,7 @@ albumRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next)
     name: req.body.name,
     artist: req.body.artist ? req.body.artist :
       res.status(400).send({error: 'artist is required'}),
-    date_release: req.body.date_release,
+    date_release: Number(req.body.date_release),
     image: req.file ? req.file.filename : null
   };
 

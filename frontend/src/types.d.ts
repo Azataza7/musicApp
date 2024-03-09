@@ -20,6 +20,14 @@ export interface Album {
   image: string;
 }
 
+export interface AlbumData {
+  name: string;
+  artist: Artist | null;
+  date_release: number;
+  image: File | null;
+  token: string;
+}
+
 export interface Track {
   _id: string;
   name: string;
