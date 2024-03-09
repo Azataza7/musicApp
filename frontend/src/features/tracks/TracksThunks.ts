@@ -1,5 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Track, trackHistoryRequest, trackHistoryType, trackHistoryTypeResponse, ValidationError } from '../../types';
+import {
+  Track,
+  TrackData,
+  trackHistoryRequest,
+  trackHistoryType,
+  trackHistoryTypeResponse,
+  ValidationError
+} from '../../types';
 import axiosApi from '../../axiosApi';
 import { isAxiosError } from 'axios';
 
@@ -11,6 +18,27 @@ export const fetchTracks = createAsyncThunk<Track[], string>(
     return response.data;
   }
 );
+
+export const createTrack = createAsyncThunk<void, TrackData, { rejectValue: ValidationError }>(
+  'tracks/create',
+  async (TrackData, {rejectWithValue}) => {
+
+    try {
+      const response = await axiosApi.post('/track', TrackData, {
+        headers: {
+          Authorization: `${TrackData.token}`
+        }
+      });
+
+      return response.data;
+    } catch (e) {
+      if (isAxiosError(e) && e.response) {
+        return rejectWithValue(e.response.data);
+      }
+    }
+  }
+);
+
 
 export const createUserTrackHistory = createAsyncThunk<trackHistoryTypeResponse, trackHistoryRequest, { rejectValue: ValidationError }>(
   'track_history',

@@ -55,60 +55,76 @@ const AddAlbum = () => {
     e.preventDefault();
 
     await dispatch(createAlbum(albumData));
-    console.log(albumData)
     navigate('/');
   };
 
   return (
     <>
       <form onSubmit={handleSubmit} style={{backgroundColor: '#c6c3c3', padding: '20px'}}>
-        <TextField
-          label="Name"
-          name="name"
-          value={albumData.name}
-          onChange={handleChange}
-          fullWidth
-          variant="outlined"
-        />
+        <Grid component="div" sx={{display: "flex", alignItems: "center"}}>
+          <Typography variant="p" sx={{color: '#000', flexBasis: '72%'}}>
+            Write album title:
+          </Typography>
+          <TextField
+            label="Name"
+            name="name"
+            value={albumData.name}
+            onChange={handleChange}
+            fullWidth
+            variant="outlined"
+            required
+          />
+        </Grid>
         <Grid component="div" sx={{display: 'flex', alignItems: 'center', margin: '20px 0'}}>
+          <Typography variant="p" sx={{color: '#000', flexBasis: '41%'}}>
+            Upload album picture:
+          </Typography>
           <FileUploadIcon/>
           <Input
             type="file"
             name="image"
             onChange={handleFileChange}
+            required
           />
         </Grid>
-        <Input
-          type="number"
-          label="date_release"
-          name="date_release"
-          placeholder="date_release"
-          value={albumData.date_release}
-          onChange={handleChange}
-          onKeyPress={(e) => {
-            const pattern = /[0-9]/;
-            const inputChar = String.fromCharCode(e.charCode);
-            if (!pattern.test(inputChar)) {
-              e.preventDefault();
-            }
-          }}
-        />
-
-        <Select
-          sx={{margin: '20px 0'}}
-          value={albumData.artist || ''}
-          onChange={handleChange}
-          name="artist"
-          variant="outlined"
-          fullWidth
-        >
-          <MenuItem value="" disabled>
-            Choose artist
-          </MenuItem>
-          {artists?.map((artist) => (
-            <MenuItem key={artist._id} value={artist._id}>{artist.name}</MenuItem>
-          ))}
-        </Select>
+        <Grid component="div" sx={{display: "flex", alignItems: "center"}}>
+          <Typography variant="p" sx={{color: '#000', flexBasis: '42%'}}>
+            Date of album release:
+          </Typography>
+          <Input
+            type="number"
+            label="date_release"
+            name="date_release"
+            placeholder="date_release"
+            value={albumData.date_release}
+            onChange={handleChange}
+            onKeyPress={(e) => {
+              const pattern = /[0-9]/;
+              const inputChar = String.fromCharCode(e.charCode);
+              if (!pattern.test(inputChar)) {
+                e.preventDefault();
+              }
+            }}
+          />
+        </Grid>
+        <Grid component="div" sx={{display: "flex", alignItems: "center", gap: 10}}>
+          <Typography variant="p" sx={{color: '#000', flexBasis: '50%'}}>
+            Choose artist:
+          </Typography>
+          <Select
+            sx={{margin: '20px 0'}}
+            value={albumData.artist || ''}
+            onChange={handleChange}
+            name="artist"
+            variant="outlined"
+            fullWidth
+            required
+          >
+            {artists?.map((artist) => (
+              <MenuItem key={artist._id} value={artist._id}>{artist.name}</MenuItem>
+            ))}
+          </Select>
+        </Grid>
         <Grid component="div">
           <Button type="submit" variant="contained" color="primary">
             Add Album

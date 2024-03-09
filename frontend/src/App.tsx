@@ -9,6 +9,7 @@ import Login from './features/users/Login';
 import TrackHistory from './Components/TrackHistory/TrackHistory';
 import AddArtist from './features/artist/AddArtist';
 import AddAlbum from './features/album/AddAlbum';
+import AddTrack from './features/tracks/AddTrack';
 
 const App = () => {
 
@@ -25,6 +26,7 @@ const App = () => {
             <Route path="/tracks/:id" element={(<Tracks/>)}/>
             <Route path="add-artist" element={(<AddArtist/>)}/>
             <Route path="add-album" element={(<AddAlbum/>)}/>
+            <Route path="add-track" element={(<AddTrack/>)}/>
 
 
             <Route path="/register" element={(<Register/>)}/>

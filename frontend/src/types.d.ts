@@ -37,6 +37,14 @@ export interface Track {
   trackNumber: number;
 }
 
+export interface TrackData {
+  name: string;
+  album: Album | null;
+  artist: Artist | null;
+  durationTime: string;
+  token: string;
+}
+
 export interface User {
   _id: string;
   username: string;

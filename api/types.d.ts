@@ -23,6 +23,7 @@ export interface AlbumTypeWithId extends AlbumType {
 export interface TrackType {
   name: string;
   album: AlbumType;
+  artist: ArtistType;
   durationTime: string;
   trackNumber: number;
 }

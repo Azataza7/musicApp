@@ -48,6 +48,7 @@ const UserMenu = () => {
         </MenuItem>
         <MenuItem><Link to="/add-artist" style={{textDecoration: 'none', color: '#000'}}>Add Artist</Link> </MenuItem>
         <MenuItem><Link to="/add-album" style={{textDecoration: 'none', color: '#000'}}>Add Album</Link> </MenuItem>
+        <MenuItem><Link to="/add-track" style={{textDecoration: 'none', color: '#000'}}>Add Track</Link> </MenuItem>
 
         <MenuItem onClick={() => setOpenModal(true)}>Logout</MenuItem>
       </Menu>

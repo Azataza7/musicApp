@@ -60,6 +60,7 @@ trackRouter.post('/', auth, async (req, res, next) => {
   const track: TrackType = {
     name: req.body.name,
     album: req.body.album,
+    artist: req.body.artist,
     durationTime: req.body.durationTime,
     trackNumber: trackCount + 1
   };
