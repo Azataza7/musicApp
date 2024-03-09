@@ -37,3 +37,14 @@ export const login = createAsyncThunk<RegisterResponse, LoginMutation, { rejectV
     }
   }
 );
+
+export const logOutUser = createAsyncThunk<void, string>(
+  'users/logOut',
+  async (token) => {
+    await axiosApi.delete('/users/sessions', {
+      headers: {
+        Authorization: token
+      }
+    });
+  }
+);

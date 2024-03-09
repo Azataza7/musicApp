@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Avatar, Button, Menu, MenuItem} from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { logoutUser, selectUser } from '../../../features/users/usersSlice';
+import { selectUser } from '../../../features/users/usersSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import LogOutModal from '../../Modals/LogOutModal';
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
+import { logOutUser } from '../../../features/users/usersThunks';
+import { User } from '../../../types';
 
 
 const UserMenu = () => {
@@ -13,7 +15,7 @@ const UserMenu = () => {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectUser);
+  const user: User = useAppSelector(selectUser);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -24,7 +26,7 @@ const UserMenu = () => {
   };
 
   const logOutHandler = async () => {
-    await dispatch(logoutUser());
+    await dispatch(logOutUser(user.token));
     return navigate('/');
   };
 
@@ -44,6 +46,9 @@ const UserMenu = () => {
         <MenuItem>
           <Link to='/track_history' style={{textDecoration: 'none'}}>Music History</Link><QueueMusicIcon/>
         </MenuItem>
+        <MenuItem><Link to="/add-artist" style={{textDecoration: 'none', color: '#000'}}>Add Artist</Link> </MenuItem>
+        <MenuItem><Link to="/add-album" style={{textDecoration: 'none', color: '#000'}}>Add Album</Link> </MenuItem>
+
         <MenuItem onClick={() => setOpenModal(true)}>Logout</MenuItem>
       </Menu>
     </>

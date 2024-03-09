@@ -2,7 +2,14 @@ export interface Artist {
   _id: string;
   name: string;
   information: string;
-  image: string;
+  image: string | null;
+}
+
+export interface ArtistData {
+  name: string;
+  information: string;
+  image: File | null;
+  token: string;
 }
 
 export interface Album {
