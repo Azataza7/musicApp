@@ -3,9 +3,9 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectArtists, selectOnloadingArtist, selectOnLoadingNewArtist } from './ArtistSlice';
 import { fetchArtists } from './ArtistThunks';
 import { CircularProgress, Grid } from '@mui/material';
-import { Artist } from '../../types';
+import { Artist, User } from '../../types';
 import ArtistItem from './ArtistItem';
-import { selectLogoutLoading } from '../users/usersSlice';
+import { selectLogoutLoading, selectUser } from '../users/usersSlice';
 
 const Artist = () => {
   const dispatch = useAppDispatch();
@@ -13,9 +13,13 @@ const Artist = () => {
   const onLoading: boolean = useAppSelector(selectOnloadingArtist);
   const logOutLoading: boolean = useAppSelector(selectLogoutLoading);
   const newArtistOnLoading: boolean = useAppSelector(selectOnLoadingNewArtist);
+  const user: User = useAppSelector(selectUser);
+
+
+  console.log(artists)
 
   useEffect(() => {
-    dispatch(fetchArtists());
+     dispatch(fetchArtists());
 
   }, [dispatch]);
 
@@ -23,6 +27,7 @@ const Artist = () => {
     return <CircularProgress
       sx={{position: 'absolute', top: '45%', left: '48%'}}/>;
   }
+
 
   const ArtistContainer: JSX.Element[] = artists.map((artist) => (
     <ArtistItem key={artist._id} artist={artist}/>

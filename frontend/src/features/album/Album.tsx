@@ -4,8 +4,9 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectAlbum, selectOnloadingAlbum } from './AlbumSlice';
 import { fetchArtistAlbums } from './AlbumThunks';
 import { CircularProgress, Grid } from '@mui/material';
-import { Album } from '../../types';
+import { Album, User } from '../../types';
 import AlbumItem from './AlbumItem';
+import { selectUser } from '../users/usersSlice';
 
 const Album = () => {
   const dispatch = useAppDispatch();
@@ -13,6 +14,9 @@ const Album = () => {
   const artistId = useParams().id.toString();
   const albums: Album[] = useAppSelector(selectAlbum);
   const onLoading: boolean = useAppSelector(selectOnloadingAlbum);
+  const user: User | null = useAppSelector(selectUser);
+
+  console.log(user)
 
   useEffect(() => {
     dispatch(fetchArtistAlbums(artistId));
