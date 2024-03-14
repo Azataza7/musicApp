@@ -38,3 +38,10 @@ export interface UserFields {
   avatar: string;
   googleID?: string;
 }
+
+export interface newUserData {
+  email: string;
+  password: string;
+  displayName?: string;
+  avatar: string | null;
+}

@@ -55,6 +55,7 @@ export interface User {
   role: string;
   avatar: string;
   displayName: string;
+  googleID: string | null;
 }
 
 export interface RegisterMutation {

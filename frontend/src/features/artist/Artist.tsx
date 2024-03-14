@@ -13,10 +13,6 @@ const Artist = () => {
   const onLoading: boolean = useAppSelector(selectOnloadingArtist);
   const logOutLoading: boolean = useAppSelector(selectLogoutLoading);
   const newArtistOnLoading: boolean = useAppSelector(selectOnLoadingNewArtist);
-  const user: User = useAppSelector(selectUser);
-
-
-  console.log(artists)
 
   useEffect(() => {
      dispatch(fetchArtists());
@@ -27,7 +23,6 @@ const Artist = () => {
     return <CircularProgress
       sx={{position: 'absolute', top: '45%', left: '48%'}}/>;
   }
-
 
   const ArtistContainer: JSX.Element[] = artists.map((artist) => (
     <ArtistItem key={artist._id} artist={artist}/>

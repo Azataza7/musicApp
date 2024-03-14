@@ -5,14 +5,24 @@ import bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
 import { OAuth2Client } from 'google-auth-library';
 import config from '../config';
+import { newUserData, UserFields } from '../types';
+import { imagesUpload } from '../multer';
 
 const userRouter = Router();
 const client = new OAuth2Client(config.google.clientId);
 
-userRouter.post('/', async (req, res, next) => {
+userRouter.post('/', imagesUpload.single('avatar'), async (req, res, next) => {
   try {
     const {email, password, displayName} = req.body;
-    const user = new User({email, password, displayName});
+
+    const newUser: newUserData = {
+      email: email,
+      password: password,
+      displayName: displayName,
+      avatar: req.file ? req.file.filename : null
+    }
+
+    const user = new User(newUser);
 
     user.generateToken();
 

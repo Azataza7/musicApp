@@ -5,15 +5,15 @@ import { isAxiosError } from 'axios';
 
 export const register = createAsyncThunk<RegisterResponse, RegisterMutation, { rejectValue: ValidationError }>(
   'users/register',
-  async (registerMutation, {rejectWithValue}) => {
+  async (state, {rejectWithValue}) => {
 
     const formData = new FormData();
-    formData.append('email', registerMutation.email);
-    formData.append('password', registerMutation.password);
-    formData.append('displayName', registerMutation.displayName);
+    formData.append('email', state.email);
+    formData.append('password', state.password);
+    formData.append('displayName', state.displayName);
 
-    if (registerMutation.avatar) {
-      formData.append('avatar', registerMutation.avatar);
+    if (state.avatar) {
+      formData.append('avatar', state.avatar);
     }
 
     try {

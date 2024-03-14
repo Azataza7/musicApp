@@ -7,6 +7,7 @@ import LogOutModal from '../../Modals/LogOutModal';
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import { logOutUser } from '../../../features/users/usersThunks';
 import { User } from '../../../types';
+import { apiURL } from '../../../constants';
 
 
 const UserMenu = () => {
@@ -32,6 +33,8 @@ const UserMenu = () => {
 
   console.log(user)
 
+  const profileImage = user.googleID ? user.avatar : apiURL + '/' + user.avatar;
+
   return (
     <>
       <LogOutModal
@@ -40,7 +43,7 @@ const UserMenu = () => {
         onLogout={logOutHandler}
       />
       <Button color="inherit" onClick={handleClick}>
-        <Avatar src={user.avatar} sx={{marginX: 2}}/>
+        <Avatar src={profileImage} sx={{marginX: 2}}/>
         {user.displayName}
       </Button>
       <Menu open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={handleClose} keepMounted>
