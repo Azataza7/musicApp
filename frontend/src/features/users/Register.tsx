@@ -13,8 +13,10 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [state, setState] = useState<RegisterMutation>({
-    username: '',
-    password: ''
+    email: '',
+    password: '',
+    displayName: '',
+    avatar: null
   });
 
   const getFieldError = (fieldName: string) => {
@@ -67,13 +69,13 @@ const Register = () => {
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Username"
-                name="username"
-                autoComplete="new-username"
-                value={state.username}
+                label="email"
+                name="email"
+                autoComplete="new-email"
+                value={state.email}
                 onChange={inputChangeHandler}
-                error={Boolean(getFieldError('username'))}
-                helperText={getFieldError('username')}
+                error={Boolean(getFieldError('email'))}
+                helperText={getFieldError('email')}
               />
             </Grid>
             <Grid item xs={12}>
@@ -87,6 +89,30 @@ const Register = () => {
                 onChange={inputChangeHandler}
                 error={Boolean(getFieldError('password'))}
                 helperText={getFieldError('password')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                name="displayName"
+                label="displayName"
+                type="displayName"
+                autoComplete="new-displayName"
+                value={state.displayName}
+                onChange={inputChangeHandler}
+                error={Boolean(getFieldError('displayName'))}
+                helperText={getFieldError('displayName')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="filled"
+                name="avatar"
+                label="Avatar"
+                type="file"
+                onChange={(event) => {
+                  state.avatar = event.target.files?.[0];
+                }}
               />
             </Grid>
           </Grid>

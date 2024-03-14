@@ -30,8 +30,11 @@ export interface TrackType {
 
 export interface UserFields {
   _id: string;
-  username: string;
+  email: string;
   password: string;
   token: string;
   role: string;
+  displayName?: string;
+  avatar: string;
+  googleID?: string;
 }

@@ -5,7 +5,8 @@ import { Alert, Avatar, Box, Button, Container, Grid, Link, TextField, Typograph
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { selectLoginError } from './usersSlice';
-import { login } from './usersThunks';
+import { googleLogin, login } from './usersThunks';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +14,7 @@ const Login = () => {
   const error = useAppSelector(selectLoginError);
 
   const [state, setState] = useState<LoginMutation>({
-    username: '',
+    email: '',
     password: ''
   });
 
@@ -29,6 +30,11 @@ const Login = () => {
     event.preventDefault();
 
     await dispatch(login(state)).unwrap();
+    navigate('/');
+  };
+
+  const googleLoginHandler = async (credential: string) => {
+    await dispatch(googleLogin(credential)).unwrap();
     navigate('/');
   };
 
@@ -51,15 +57,28 @@ const Login = () => {
           Sign in
         </Typography>
         {error && (<Alert severity="error" sx={{mt: 3, width: '100%'}}>{error.error}</Alert>)}
+
+        <Box sx={{pt: 2}}>
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              if (credentialResponse.credential) {
+                void googleLoginHandler(credentialResponse.credential)
+              }
+            }}
+            onError={() => {
+              console.log('Login failed');
+            }}
+          />
+        </Box>
         <Box component="form" onSubmit={submitFormHandler} sx={{mt: 3}}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Username"
-                name="username"
-                autoComplete="current-username"
-                value={state.username}
+                label="email"
+                name="email"
+                autoComplete="current-email"
+                value={state.email}
                 onChange={inputChangeHandler}
               />
             </Grid>

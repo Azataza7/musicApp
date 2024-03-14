@@ -30,6 +30,8 @@ const UserMenu = () => {
     return navigate('/');
   };
 
+  console.log(user)
+
   return (
     <>
       <LogOutModal
@@ -38,8 +40,8 @@ const UserMenu = () => {
         onLogout={logOutHandler}
       />
       <Button color="inherit" onClick={handleClick}>
-        <Avatar src="/broken-image.jpg" sx={{marginX: 2}}/>
-        {user.username}
+        <Avatar src={user.avatar} sx={{marginX: 2}}/>
+        {user.displayName}
       </Button>
       <Menu open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={handleClose} keepMounted>
         <MenuItem>Profile</MenuItem>

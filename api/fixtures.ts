@@ -22,16 +22,18 @@ const run = async () => {
 
   await User.create(
     {
-      username: 'superUser',
+      email: 'superUser',
       password: 'admin123',
       token: 'adminToken',
-      role: 'admin'
+      role: 'admin',
+      displayName: 'Dirty Billy'
     },
     {
-      username: 'user',
+      email: 'user',
       password: 'admin123',
       token: 'userToken',
-      role: 'user'
+      role: 'user',
+      displayName: 'Double wide Joe',
     }
   );
 

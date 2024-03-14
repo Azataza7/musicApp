@@ -14,18 +14,18 @@ interface UserMethods {
 type UserModel = Model<UserFields, {}, UserMethods>
 
 const UserSchema = new Schema<UserFields, UserModel>({
-  username: {
+  email: {
     type: String,
     required: true,
     unique: true,
     validate: {
       validator: async function (this: HydratedDocument<UserFields>, value: string): Promise<boolean> {
-        if (!this.isModified('username')) return true;
+        if (!this.isModified('email')) return true;
 
-        const user = await User.findOne({username: value});
+        const user = await User.findOne({email: value});
         return !user;
       },
-      message: 'this username has been reserved'
+      message: 'this email has been reserved'
     }
   },
   password: {
@@ -41,7 +41,13 @@ const UserSchema = new Schema<UserFields, UserModel>({
     required: true,
     enum: ['admin', 'user'],
     default: 'user'
-  }
+  },
+  displayName: {
+    type: String,
+    required: true
+  },
+  googleID: String,
+  avatar: String
 });
 
 UserSchema.methods.checkPassword = async function (password: string) {

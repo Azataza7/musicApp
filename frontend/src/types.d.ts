@@ -50,18 +50,22 @@ export interface TrackData {
 
 export interface User {
   _id: string;
-  username: string;
+  email: string;
   token: string;
   role: string;
+  avatar: string;
+  displayName: string;
 }
 
 export interface RegisterMutation {
-  username: string;
+  email: string;
   password: string;
+  displayName: string;
+  avatar: string | null;
 }
 
 export interface LoginMutation {
-  username: string;
+  email: string;
   password: string;
 }
 
